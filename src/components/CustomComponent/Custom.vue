@@ -9,13 +9,13 @@
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="titleInp">Title</label>
-                <input class="form-control" id="titleInp" type="text" placeholder="MENU" v-model="title">
+                <input class="form-control" id="titleInp" type="text" placeholder="MENU" @input="titleChange" :value="title">
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="fontSizeInp">Font size</label>
-                <input class="form-control" id="fontSizeInp" type="number" placeholder="16" v-model="fontSize">
+                <input class="form-control" id="fontSizeInp" type="number" placeholder="16" @input="fontSizeChange" :value="fontSize">
               </div>
             </div>
           </form>
@@ -28,14 +28,26 @@
 import Card from './Card'
 export default {
   name: 'App',
-  data () {
-    return {
-      title: '',
-      fontSize: '16'
-    }
+  props: {
+      title: {
+          type: String,
+          default: 'MENU'
+      },
+      fontSize: {
+          type: String,
+          default: '16'
+      }
   },
   components: {
     Card
+  },
+  methods: {
+    titleChange (e) {
+      this.$emit('titleChange', e.target.value)
+    },
+    fontSizeChange (e) {
+      this.$emit('fontSizeChange', e.target.value)
+    }
   }
 }
 </script>
